@@ -58,7 +58,7 @@ checks:
         - javascript
         - php
   similar-code:
-    enabled: true
+    enabled: false
     config:
       threshold: 400
       languages:
