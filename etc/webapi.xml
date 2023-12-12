@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Getnet. All rights reserved.
+ *
+ * @author    Bruno Elisei <brunoelisei@o2ti.com>
+ * See LICENSE for license details.
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/guest-carts/:cartId/generate-credit-card-number-token" method="POST">
+        <service class="Getnet\PaymentMagento\Api\GuestNumberTokenManagementInterface" method="generateNumberToken"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/carts/mine/generate-credit-card-number-token" method="POST">
+        <service class="Getnet\PaymentMagento\Api\NumberTokenManagementInterface" method="generateNumberToken"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/carts/mine/create-vault" method="POST">
+        <service class="Getnet\PaymentMagento\Api\CreateVaultManagementInterface" method="createVault"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/carts/mine/get-details-card-id" method="POST">
+        <service class="Getnet\PaymentMagento\Api\CardIdManagementInterface" method="getDetailsCardId"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/guest-carts/:cartId/getnet-interest" method="POST">
+        <service class="Getnet\PaymentMagento\Api\GuestInterestManagementInterface" method="generateGetnetInterest"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/carts/mine/getnet-interest" method="POST">
+        <service class="Getnet\PaymentMagento\Api\InterestManagementInterface" method="generateGetnetInterest"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/guest-carts/:cartId/getnet-two-cc-interest" method="POST">
+        <service class="Getnet\PaymentMagento\Api\TwoCc\GuestTwoCcInterestManagementInterface" method="generateGetnetTwoInterest"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/carts/mine/getnet-two-cc-interest" method="POST">
+        <service class="Getnet\PaymentMagento\Api\TwoCc\TwoCcInterestManagementInterface" method="generateGetnetTwoInterest"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+</routes>
